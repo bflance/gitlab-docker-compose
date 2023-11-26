@@ -1,0 +1,26 @@
+version: '3.6'
+services:
+  gitlab:
+    hostname: 'localhost'
+    container_name: gitlab-ce
+    platform: linux/amd64
+    #image: 'gitlab/gitlab-ce:latest'
+    image: 'gitlab/gitlab-ce:16.5.2-ce.0'
+    restart: always
+    privileged: true
+    environment:
+      GITLAB_ROOT_PASSWORD: "MySecretPassword"
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'https://localhost'
+    ports:
+      - '8081:80'
+      - '8443:443'
+      - '9422:22'
+    shm_size: '1024m'
+    volumes:
+      - '${PWD}/scripts:/scripts'
+      - '${PWD}/backups:/var/opt/gitlab/backups'
+#      - '${PWD}/config:/etc/gitlab'
+#      - '${PWD}/logs:/var/log/gitlab'
+#      - '${PWD}/data:/var/opt/gitlab'
+#      - '${PWD}/gitlab-backup:/etc/gitlab/config_backup'

@@ -1,0 +1,1 @@
+gitlab-rails runner "token = User.find_by_username('root').personal_access_tokens.create(scopes: ['api','admin_mode'], name: 'Generated token', expires_at: 365.days.from_now); token.set_token('this-is-my-secret-token123'); token.save!"
